@@ -4,6 +4,8 @@ import android.util.Log;
 
 /**
  * Created by YuanZezhong on 2017/7/26.
+ *
+ * 实现ILogger的基本功能
  */
 public class LoggerImpl extends AbstractNamedLogger {
     private boolean mIsForceLog = true;
@@ -19,40 +21,47 @@ public class LoggerImpl extends AbstractNamedLogger {
     }
 
     @Override
-    public void trace(String msg) {
+    public ILogger trace(String msg) {
         log(Log.VERBOSE, msg, null);
+        return this;
     }
 
     @Override
-    public void trace(String format, Object... args) {
+    public ILogger trace(String format, Object... args) {
         formatAndLog(Log.VERBOSE, format, args);
+        return this;
     }
 
     @Override
-    public void trace(String msg, Throwable t) {
+    public ILogger trace(String msg, Throwable t) {
         log(Log.VERBOSE, msg, t);
+        return this;
     }
 
     @Override
-    public void traceIn(String msg) {
+    public ILogger traceIn(String msg) {
         log(Log.VERBOSE, "-----------------" + msg + "--BEGIN-----------------", null);
+        return this;
     }
 
     @Override
-    public void traceOut(String msg) {
+    public ILogger traceOut(String msg) {
         log(Log.VERBOSE, "-----------------" + msg + "--END-----------------", null);
+        return this;
     }
 
     @Override
-    public void beginMethod() {
+    public ILogger beginMethod() {
         String method = getCallerInfo(1, ", ", true, true, false, false);
         traceIn(method);
+        return this;
     }
 
     @Override
-    public void endMethod() {
+    public ILogger endMethod() {
         String method = getCallerInfo(1, ", ", true, true, false, false);
         traceOut(method);
+        return this;
     }
 
     @Override
@@ -61,18 +70,21 @@ public class LoggerImpl extends AbstractNamedLogger {
     }
 
     @Override
-    public void d(String msg) {
+    public ILogger d(String msg) {
         log(Log.DEBUG, msg, null);
+        return this;
     }
 
     @Override
-    public void d(String format, Object... args) {
+    public ILogger d(String format, Object... args) {
         formatAndLog(Log.DEBUG, format, args);
+        return this;
     }
 
     @Override
-    public void d(String msg, Throwable t) {
+    public ILogger d(String msg, Throwable t) {
         log(Log.DEBUG, msg, t);
+        return this;
     }
 
     @Override
@@ -81,18 +93,21 @@ public class LoggerImpl extends AbstractNamedLogger {
     }
 
     @Override
-    public void i(String msg) {
+    public ILogger i(String msg) {
         log(Log.INFO, msg, null);
+        return this;
     }
 
     @Override
-    public void i(String format, Object... args) {
+    public ILogger i(String format, Object... args) {
         formatAndLog(Log.INFO, format, args);
+        return this;
     }
 
     @Override
-    public void i(String msg, Throwable t) {
+    public ILogger i(String msg, Throwable t) {
         log(Log.INFO, msg, t);
+        return this;
     }
 
     @Override
@@ -101,18 +116,21 @@ public class LoggerImpl extends AbstractNamedLogger {
     }
 
     @Override
-    public void w(String msg) {
+    public ILogger w(String msg) {
         log(Log.WARN, msg, null);
+        return this;
     }
 
     @Override
-    public void w(String format, Object... args) {
+    public ILogger w(String format, Object... args) {
         formatAndLog(Log.WARN, format, args);
+        return this;
     }
 
     @Override
-    public void w(String msg, Throwable t) {
+    public ILogger w(String msg, Throwable t) {
         log(Log.WARN, msg, t);
+        return this;
     }
 
     @Override
@@ -121,22 +139,25 @@ public class LoggerImpl extends AbstractNamedLogger {
     }
 
     @Override
-    public void e(String msg) {
+    public ILogger e(String msg) {
         log(Log.ERROR, msg, null);
+        return this;
     }
 
     @Override
-    public void e(String format, Object... args) {
+    public ILogger e(String format, Object... args) {
         formatAndLog(Log.ERROR, format, args);
+        return this;
     }
 
     @Override
-    public void e(String msg, Throwable t) {
+    public ILogger e(String msg, Throwable t) {
         log(Log.ERROR, msg, t);
+        return this;
     }
 
     @Override
-    public void printStackTrace() {
+    public ILogger printStackTrace() {
         if (isEnabled() && (isForceLog() || isLoggable(Log.VERBOSE))) {
             StackTraceElement[] stes = Thread.currentThread().getStackTrace();
             StringBuilder result = new StringBuilder();
@@ -149,6 +170,7 @@ public class LoggerImpl extends AbstractNamedLogger {
             }
             logInternal(Log.VERBOSE, result.toString(), null);
         }
+        return this;
     }
 
     @Override
@@ -157,8 +179,9 @@ public class LoggerImpl extends AbstractNamedLogger {
     }
 
     @Override
-    public void setEnabled(boolean isEnabled) {
+    public ILogger setEnabled(boolean isEnabled) {
         mIsEnabled = isEnabled;
+        return this;
     }
 
     @Override
@@ -167,8 +190,9 @@ public class LoggerImpl extends AbstractNamedLogger {
     }
 
     @Override
-    public void setForceLog(boolean isForceLog) {
+    public ILogger setForceLog(boolean isForceLog) {
         mIsForceLog = isForceLog;
+        return this;
     }
 
     protected boolean isLoggable(int priority) {

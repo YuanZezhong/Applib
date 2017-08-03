@@ -12,8 +12,6 @@ public class DBOperationImpl implements IDBOperation {
     private DBHelper mDBHelper;
     private Context mContext;
 
-
-
     @Override
     public String getSqlString(int sqlStringId) {
         return null;

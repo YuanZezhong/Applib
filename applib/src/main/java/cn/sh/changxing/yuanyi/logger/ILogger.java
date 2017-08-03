@@ -25,7 +25,7 @@ public interface ILogger {
      *
      * @param msg 输出LOG的内容
      */
-    public void trace(String msg);
+    public ILogger trace(String msg);
 
     /**
      * 输出trace级别的LOG
@@ -33,7 +33,7 @@ public interface ILogger {
      * @param format 格式化字符串
      * @param args   格式化参数
      */
-    public void trace(String format, Object... args);
+    public ILogger trace(String format, Object... args);
 
     /**
      * 输出trace级别的LOG
@@ -41,31 +41,31 @@ public interface ILogger {
      * @param msg 输出LOG的内容
      * @param t   附加的异常信息
      */
-    public void trace(String msg, Throwable t);
+    public ILogger trace(String msg, Throwable t);
 
     /**
      * 输出trace级别的LOG，并增加标识开始的前后缀
      *
      * @param msg 输出的LOG内容
      */
-    public void traceIn(String msg);
+    public ILogger traceIn(String msg);
 
     /**
      * 输出trace级别的LOG，并增加标识结束的前后缀
      *
      * @param msg 输出的LOG内容
      */
-    public void traceOut(String msg);
+    public ILogger traceOut(String msg);
 
     /**
      * 输出trace级别的方法调用LOG
      */
-    public void beginMethod();
+    public ILogger beginMethod();
 
     /**
      * 输出trace级别的方法调用LOG
      */
-    public void endMethod();
+    public ILogger endMethod();
 
     /**
      * debug级别的LOG是否开启
@@ -79,7 +79,7 @@ public interface ILogger {
      *
      * @param msg 输出的LOG内容
      */
-    public void d(String msg);
+    public ILogger d(String msg);
 
     /**
      * 输出debug级别的LOG
@@ -87,7 +87,7 @@ public interface ILogger {
      * @param format 格式化字符串
      * @param args   格式化参数
      */
-    public void d(String format, Object... args);
+    public ILogger d(String format, Object... args);
 
     /**
      * 输出debug级别的LOG
@@ -95,7 +95,7 @@ public interface ILogger {
      * @param msg 输出LOG的内容
      * @param t   附加的异常信息
      */
-    public void d(String msg, Throwable t);
+    public ILogger d(String msg, Throwable t);
 
     /**
      * info级别的LOG是否开启
@@ -109,7 +109,7 @@ public interface ILogger {
      *
      * @param msg 输出LOG的内容
      */
-    public void i(String msg);
+    public ILogger i(String msg);
 
     /**
      * 输出info级别的LOG
@@ -117,7 +117,7 @@ public interface ILogger {
      * @param format 格式化字符串
      * @param args   格式化参数
      */
-    public void i(String format, Object... args);
+    public ILogger i(String format, Object... args);
 
     /**
      * 输出info级别的LOG
@@ -125,7 +125,7 @@ public interface ILogger {
      * @param msg 输出LOG的内容
      * @param t   附加的异常信息
      */
-    public void i(String msg, Throwable t);
+    public ILogger i(String msg, Throwable t);
 
     /**
      * warn级别的LOG是否开启
@@ -139,7 +139,7 @@ public interface ILogger {
      *
      * @param msg 输出LOG的内容
      */
-    public void w(String msg);
+    public ILogger w(String msg);
 
     /**
      * 输出warn级别的LOG
@@ -147,7 +147,7 @@ public interface ILogger {
      * @param format 格式化字符串
      * @param args   格式化参数
      */
-    public void w(String format, Object... args);
+    public ILogger w(String format, Object... args);
 
     /**
      * 输出warn级别的LOG
@@ -155,7 +155,7 @@ public interface ILogger {
      * @param msg 输出LOG的内容
      * @param t   附加的异常信息
      */
-    public void w(String msg, Throwable t);
+    public ILogger w(String msg, Throwable t);
 
     /**
      * error级别的LOG是否开启
@@ -169,7 +169,7 @@ public interface ILogger {
      *
      * @param msg 输出LOG的内容
      */
-    public void e(String msg);
+    public ILogger e(String msg);
 
     /**
      * 输出error级别的LOG
@@ -177,7 +177,7 @@ public interface ILogger {
      * @param format 格式化字符串
      * @param args   格式化参数
      */
-    public void e(String format, Object... args);
+    public ILogger e(String format, Object... args);
 
     /**
      * 输出error级别的LOG
@@ -185,12 +185,12 @@ public interface ILogger {
      * @param msg 输出LOG的内容
      * @param t   附加的异常信息
      */
-    public void e(String msg, Throwable t);
+    public ILogger e(String msg, Throwable t);
 
     /**
      * trace级别输出方法调用的堆栈信息
      */
-    public void printStackTrace();
+    public ILogger printStackTrace();
 
     /**
      * log功能是否开启
@@ -204,12 +204,12 @@ public interface ILogger {
      *
      * @param isEnabled true打开, false关闭
      */
-    public void setEnabled(boolean isEnabled);
+    public ILogger setEnabled(boolean isEnabled);
 
     /**
      * 是否忽略设备的默认LOG级别限制，强制输出LOG
      *
-     * @return
+     * @return true:强制输出, false:不强制
      */
     public boolean isForceLog();
 
@@ -218,5 +218,5 @@ public interface ILogger {
      *
      * @param isForceLog true打开, false关闭
      */
-    public void setForceLog(boolean isForceLog);
+    public ILogger setForceLog(boolean isForceLog);
 }

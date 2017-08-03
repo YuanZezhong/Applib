@@ -2,7 +2,7 @@ package cn.sh.changxing.yuanyi.logger;
 
 public class FormattingTuple {
 
-    static public FormattingTuple NULL = new FormattingTuple(null);
+    public static FormattingTuple NULL = new FormattingTuple(null);
 
     private String message;
     private Throwable throwable;
