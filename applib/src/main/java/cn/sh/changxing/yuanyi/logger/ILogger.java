@@ -14,6 +14,13 @@ public interface ILogger {
     public String getName();
 
     /**
+     * 获取调用此方法的方法名
+     *
+     * @return 方法名
+     */
+    public String getCallerName();
+
+    /**
      * trace级别的LOG是否开启
      *
      * @return true开启, false未开启

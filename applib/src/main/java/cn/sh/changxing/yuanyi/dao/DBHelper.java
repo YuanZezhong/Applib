@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
     private IDBCreator mCreator;
 
-    public static DBHelper obtainDBHelper(Context context, IDBCreator creator) {
+    public static DBHelper newInstance(Context context, IDBCreator creator) {
         if (context == null || creator == null) {
             throw new IllegalArgumentException("context or creator is null");
         }

@@ -16,6 +16,11 @@ public class LoggerImpl extends AbstractNamedLogger {
     }
 
     @Override
+    public String getCallerName() {
+        return getCallerInfo(1, "", false, false, false, false);
+    }
+
+    @Override
     public boolean isTraceEnabled() {
         return isLoggable(Log.VERBOSE);
     }

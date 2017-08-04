@@ -94,15 +94,17 @@ public class ExampleInstrumentedTest {
         }
 
         @Override
-        public void beginMethod() {
+        public ILogger beginMethod() {
             String method = getCallerInfo(4, "|", true, true, false, false);
             traceIn(method);
+            return this;
         }
 
         @Override
-        public void endMethod() {
+        public ILogger endMethod() {
             String method = getCallerInfo(4, "|", true, true, false, false);
             traceOut(method);
+            return this;
         }
     }
 }
