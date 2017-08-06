@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sql_download_list_create">
+        <![CDATA[
+        CREATE TABLE IF NOT EXISTS download(songId INTEGER PRIMARY KEY,songName TEXT)
+        ]]>
+    </string>
+
+    <string name="sql_download_insert">
+        <![CDATA[
+        INSERT INTO download(songId,songName) VALUES(?,?)
+        ]]>
+    </string>
+
+    <string name="sql_download_get_song_by_id">
+        <![CDATA[
+        SELECT * FROM download WHERE songId=?
+        ]]>
+    </string>
+
+    <string name="sql_download_get_song_list">
+        <![CDATA[
+        SELECT * FROM download
+        ]]>
+    </string>
+
+</resources>

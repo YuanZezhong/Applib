@@ -2,6 +2,8 @@ package cn.sh.changxing.yuanyi.logger;
 
 import android.util.Log;
 
+import cn.sh.changxing.yuanyi.utils.CommonUtils;
+
 /**
  * Created by YuanZezhong on 2017/7/26.
  *
@@ -17,7 +19,7 @@ public class LoggerImpl extends AbstractNamedLogger {
 
     @Override
     public String getCallerName() {
-        return getCallerInfo(1, "", false, false, false, false);
+        return CommonUtils.getCallerInfo(1, "", false, false, false, false);
     }
 
     @Override
@@ -57,14 +59,14 @@ public class LoggerImpl extends AbstractNamedLogger {
 
     @Override
     public ILogger beginMethod() {
-        String method = getCallerInfo(1, ", ", true, true, false, false);
+        String method = CommonUtils.getCallerInfo(1, ", ", true, true, false, false);
         traceIn(method);
         return this;
     }
 
     @Override
     public ILogger endMethod() {
-        String method = getCallerInfo(1, ", ", true, true, false, false);
+        String method = CommonUtils.getCallerInfo(1, ", ", true, true, false, false);
         traceOut(method);
         return this;
     }
@@ -141,6 +143,12 @@ public class LoggerImpl extends AbstractNamedLogger {
     @Override
     public boolean isErrorEnabled() {
         return isLoggable(Log.ERROR);
+    }
+
+    @Override
+    public ILogger e(Throwable t) {
+        log(Log.ERROR, "", t);
+        return this;
     }
 
     @Override
@@ -222,41 +230,5 @@ public class LoggerImpl extends AbstractNamedLogger {
             msg += '\n' + Log.getStackTraceString(t);
         }
         Log.println(priority, mName, msg);
-    }
-
-    /**
-     * 获取调用此方法的方法调用信息
-     *
-     * @param depth      调用此方法的方法级别是 0
-     * @param separator  信息之间的分隔符
-     * @param fileName   是否需要方法所在的文件名
-     * @param lineNumber 是否需要方法所在的行号
-     * @param className  是否需要方法所在的类名
-     * @param threadName 是否需要方法所在的线程名
-     * @return 多项数据的组合字符串
-     */
-    public String getCallerInfo(int depth, String separator, boolean fileName, boolean lineNumber, boolean className, boolean threadName) {
-        StackTraceElement[] stes = Thread.currentThread().getStackTrace();
-        if (stes != null && stes.length > 3 + depth) {
-            StackTraceElement ste = stes[3 + depth];
-            StringBuilder result = new StringBuilder();
-            result.append("[");
-            if (fileName) {
-                result.append(ste.getFileName()).append(separator);
-            }
-            result.append(ste.getMethodName()).append("()");
-            if (lineNumber) {
-                result.append(separator).append(ste.getLineNumber());
-            }
-            if (className) {
-                result.append(separator).append(ste.getClassName());
-            }
-            if (threadName) {
-                result.append(separator).append(Thread.currentThread().getName());
-            }
-            result.append("]");
-            return result.toString();
-        }
-        return "";
     }
 }

@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return new DBHelper(context, creator);
     }
 
-    DBHelper(Context context, IDBCreator creator) {
+    protected DBHelper(Context context, IDBCreator creator) {
         super(context, creator.getDatabaseName(), creator.getCursorFactory(), creator.getDatabaseVersion());
         mCreator = creator;
     }

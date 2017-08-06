@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -61,7 +62,7 @@ public class DBOperationImpl implements IDBOperation {
         return new DBOperationImpl(context, dbHelper);
     }
 
-    DBOperationImpl(Context context, SQLiteOpenHelper dbHelper) {
+    protected DBOperationImpl(Context context, SQLiteOpenHelper dbHelper) {
         mContext = context.getApplicationContext();
         mDBHelper = dbHelper;
     }
@@ -82,15 +83,33 @@ public class DBOperationImpl implements IDBOperation {
     }
 
     @Override
+    public boolean transactionInsert(int sqlStringId, Object[] params) {
+        checkDatabaseOpen();
+        return baseCRUDOperation(sqlStringId, params, mDatabase, DBException.CODE_INSERT, true);
+    }
+
+    @Override
     public boolean delete(int sqlStringId, Object[] params) {
         checkDatabaseOpen();
         return baseCRUDOperation(sqlStringId, params, mDatabase, DBException.CODE_DELETE, false);
     }
 
     @Override
+    public boolean transactionDelete(int sqlStringId, Object[] params) {
+        checkDatabaseOpen();
+        return baseCRUDOperation(sqlStringId, params, mDatabase, DBException.CODE_DELETE, true);
+    }
+
+    @Override
     public boolean update(int sqlStringId, Object[] params) {
         checkDatabaseOpen();
         return baseCRUDOperation(sqlStringId, params, mDatabase, DBException.CODE_UPDATE, false);
+    }
+
+    @Override
+    public boolean transactionUpdate(int sqlStringId, Object[] params) {
+        checkDatabaseOpen();
+        return baseCRUDOperation(sqlStringId, params, mDatabase, DBException.CODE_UPDATE, true);
     }
 
     @Override
@@ -113,6 +132,24 @@ public class DBOperationImpl implements IDBOperation {
     public Cursor queryToCursor(int sqlStringId, String[] params) {
         checkDatabaseOpen();
         return mDatabase.rawQuery(getSqlString(sqlStringId), params);
+    }
+
+    @Override
+    public void beginTransaction() {
+        checkDatabaseOpen();
+        mDatabase.beginTransaction();
+    }
+
+    @Override
+    public void endTransaction() {
+        checkDatabaseOpen();
+        mDatabase.endTransaction();
+    }
+
+    @Override
+    public void setTransactionSuccessful() {
+        checkDatabaseOpen();
+        mDatabase.setTransactionSuccessful();
     }
 
     /**

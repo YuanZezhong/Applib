@@ -15,7 +15,7 @@ public class LoggerFactory {
     private static ILogger sDefaultLogger;
 
     public static ILogger getLogger(String name) {
-        return getCustomLogger(LoggerImpl.class, name);
+        return getNamedLogger(LoggerImpl.class, name);
     }
 
     public static ILogger getLogger(Class<?> tagClass) {
@@ -29,11 +29,11 @@ public class LoggerFactory {
         return sDefaultLogger;
     }
 
-    public static <T extends AbstractNamedLogger> ILogger getCustomLogger(Class<T> loggerClass, Class<?> tagClass) {
-        return getCustomLogger(loggerClass, tagClass.getName());
+    public static <T extends AbstractNamedLogger> ILogger getNamedLogger(Class<T> loggerClass, Class<?> tagClass) {
+        return getNamedLogger(loggerClass, tagClass.getName());
     }
 
-    public static <T extends AbstractNamedLogger> ILogger getCustomLogger(Class<T> loggerClass, String name) {
+    public static <T extends AbstractNamedLogger> ILogger getNamedLogger(Class<T> loggerClass, String name) {
         if (loggerClass == null) {
             throw new IllegalArgumentException("loggerClass cannot be null");
         }

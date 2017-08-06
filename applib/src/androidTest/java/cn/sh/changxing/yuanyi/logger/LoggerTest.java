@@ -1,6 +1,5 @@
-package cn.sh.changxing.yuanyi;
+package cn.sh.changxing.yuanyi.logger;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
@@ -11,8 +10,9 @@ import org.junit.runner.RunWith;
 import cn.sh.changxing.yuanyi.logger.ILogger;
 import cn.sh.changxing.yuanyi.logger.LoggerFactory;
 import cn.sh.changxing.yuanyi.logger.LoggerImpl;
+import cn.sh.changxing.yuanyi.utils.CommonUtils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -20,7 +20,8 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class LoggerTest {
+
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
@@ -43,7 +44,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testCustomLogger() {
-        ILogger logger = LoggerFactory.getCustomLogger(MyLogger.class, "Yuan");
+        ILogger logger = LoggerFactory.getNamedLogger(MyLogger.class, "Yuan");
         loggerMsg(logger);
     }
 
@@ -79,12 +80,8 @@ public class ExampleInstrumentedTest {
     public void getCaller() {
         LoggerImpl logger = (LoggerImpl) LoggerFactory.getDefault();
         logger.beginMethod();
-        logger.d("caller info is {}", logger.getCallerInfo(0, ", ", true, true, false, false));
+        logger.d("caller info is {}", CommonUtils.getCallerInfo(0, ", ", true, true, false, false));
         logger.endMethod();
-    }
-
-    public void testCallerInfo() {
-        Activity activity = null;
     }
 
     private static class MyLogger extends LoggerImpl {
@@ -95,14 +92,14 @@ public class ExampleInstrumentedTest {
 
         @Override
         public ILogger beginMethod() {
-            String method = getCallerInfo(4, "|", true, true, false, false);
+            String method = CommonUtils.getCallerInfo(4, "|", true, true, false, false);
             traceIn(method);
             return this;
         }
 
         @Override
         public ILogger endMethod() {
-            String method = getCallerInfo(4, "|", true, true, false, false);
+            String method = CommonUtils.getCallerInfo(4, "|", true, true, false, false);
             traceOut(method);
             return this;
         }

@@ -20,7 +20,7 @@ public interface IDBOperation {
     public String getSqlString(int sqlStringId);
 
     /**
-     * 向数据库中插入一条记录
+     * 向数据库中插入一条记录(不开起事务)
      *
      * @param sqlStringId SQL语句的资源id
      * @param params      替换SQL语句中占位符的参数
@@ -29,7 +29,16 @@ public interface IDBOperation {
     public boolean insert(int sqlStringId, Object[] params);
 
     /**
-     * 从数据库中删除一条记录
+     * 向数据库中插入一条记录(开起事务)
+     *
+     * @param sqlStringId SQL语句的资源id
+     * @param params      替换SQL语句中占位符的参数
+     * @return 执行是否成功
+     */
+    public boolean transactionInsert(int sqlStringId, Object[] params);
+
+    /**
+     * 从数据库中删除一条记录(不开起事务)
      *
      * @param sqlStringId SQL语句的资源id
      * @param params      替换SQL语句中占位符的参数
@@ -38,13 +47,31 @@ public interface IDBOperation {
     public boolean delete(int sqlStringId, Object[] params);
 
     /**
-     * 更新数据库中记录
+     * 从数据库中删除一条记录(开起事务)
+     *
+     * @param sqlStringId SQL语句的资源id
+     * @param params      替换SQL语句中占位符的参数
+     * @return 执行是否成功
+     */
+    public boolean transactionDelete(int sqlStringId, Object[] params);
+
+    /**
+     * 更新数据库中记录(不开起事务)
      *
      * @param sqlStringId SQL语句的资源id
      * @param params      替换SQL语句中占位符的参数
      * @return 执行是否成功
      */
     public boolean update(int sqlStringId, Object[] params);
+
+    /**
+     * 更新数据库中记录(不开起事务)
+     *
+     * @param sqlStringId SQL语句的资源id
+     * @param params      替换SQL语句中占位符的参数
+     * @return 执行是否成功
+     */
+    public boolean transactionUpdate(int sqlStringId, Object[] params);
 
     /**
      * 从新数据库中获取记录并转换成对象
@@ -74,6 +101,21 @@ public interface IDBOperation {
      * @return 查询到的记录转换成的Cursor
      */
     public Cursor queryToCursor(int sqlStringId, String[] params);
+
+    /**
+     * 开启事务
+     */
+    public void beginTransaction();
+
+    /**
+     * 结束事务
+     */
+    public void endTransaction();
+
+    /**
+     * 标志事务成功
+     */
+    public void setTransactionSuccessful();
 
     /**
      * 打开数据库

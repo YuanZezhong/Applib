@@ -172,6 +172,13 @@ public interface ILogger {
     public boolean isErrorEnabled();
 
     /**
+     * 输出error级别的Log
+     *
+     * @param t 异常信息
+     */
+    public ILogger e(Throwable t);
+
+    /**
      * 输出error级别的LOG
      *
      * @param msg 输出LOG的内容
