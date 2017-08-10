@@ -13,4 +13,6 @@ public interface IPreferences {
     public <T> IPreferences putMap(Map<String, T> map);
 
     public <T> T get(String key, T defaultVal);
+
+    public Map<String, ?> getAll();
 }
