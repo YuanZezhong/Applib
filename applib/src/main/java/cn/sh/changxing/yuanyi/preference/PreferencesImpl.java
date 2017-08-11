@@ -61,30 +61,33 @@ public class PreferencesImpl extends BasePreferences {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T get(String key, T defValue) {
+        if (defValue == null) {
+            return (T) get(key, Set.class, null);
+        }
+        Class<T> c = (Class<T>) defValue.getClass();
+        return get(key, c, defValue);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T get(String key, Class<T> c, T defValue) {
         T result = null;
-        if (defValue != null) {
-            Class<?> c = defValue.getClass();
-            if (Boolean.class.isAssignableFrom(c)) {
-                result = (T) Boolean.valueOf(mPreferences.getBoolean(key, (Boolean) defValue));
-            } else if (Integer.class.isAssignableFrom(c)) {
-                result = (T) Integer.valueOf(mPreferences.getInt(key, (Integer) defValue));
-            } else if (Float.class.isAssignableFrom(c)) {
-                result = (T) Float.valueOf(mPreferences.getFloat(key, (Float) defValue));
-            } else if (Long.class.isAssignableFrom(c)) {
-                result = (T) Long.valueOf(mPreferences.getLong(key, (Long) defValue));
-            } else if(String.class.isAssignableFrom(c)) {
-                result = (T) mPreferences.getString(key, (String) defValue);
-            } else if (Set.class.isAssignableFrom(c)) {
-                result = (T) mPreferences.getStringSet(key, (Set) defValue);
-            } else if (Double.class.isAssignableFrom(c)) {
-                result = (T) getDouble(key, (Double) defValue);
-            } else {
-                // 不支持的类型
-            }
-        } else {
-            // TODO: 2017/8/11 暂且当成Set处理
-            result = (T) mPreferences.getStringSet(key, null);
+        if (Boolean.class.isAssignableFrom(c)) {
+            result = (T) Boolean.valueOf(mPreferences.getBoolean(key, (Boolean) defValue));
+        } else if (Integer.class.isAssignableFrom(c)) {
+            result = (T) Integer.valueOf(mPreferences.getInt(key, (Integer) defValue));
+        } else if (Float.class.isAssignableFrom(c)) {
+            result = (T) Float.valueOf(mPreferences.getFloat(key, (Float) defValue));
+        } else if (Long.class.isAssignableFrom(c)) {
+            result = (T) Long.valueOf(mPreferences.getLong(key, (Long) defValue));
+        } else if(String.class.isAssignableFrom(c)) {
+            result = (T) mPreferences.getString(key, (String) defValue);
+        } else if (Set.class.isAssignableFrom(c)) {
+            result = (T) mPreferences.getStringSet(key, (Set) defValue);
+        } else if (Double.class.isAssignableFrom(c)) {
+            result = (T) getDouble(key, (Double) defValue);
         }
         return result;
     }

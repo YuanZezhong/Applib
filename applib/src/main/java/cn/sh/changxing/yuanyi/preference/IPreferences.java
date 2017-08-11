@@ -92,6 +92,16 @@ public interface IPreferences {
     public <T> T get(String key, T defValue);
 
     /**
+     * 获取一条记录的值
+     *
+     * @param key      记录的键
+     * @param c        记录值的类型
+     * @param defValue 默认值
+     * @return 记录的值
+     */
+    public <T> T get(String key, Class<T> c, T defValue);
+
+    /**
      * 获取所有的记录
      *
      * @return 所有的记录
