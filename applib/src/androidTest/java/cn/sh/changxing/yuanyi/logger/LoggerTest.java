@@ -7,9 +7,6 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import cn.sh.changxing.yuanyi.logger.ILogger;
-import cn.sh.changxing.yuanyi.logger.LoggerFactory;
-import cn.sh.changxing.yuanyi.logger.LoggerImpl;
 import cn.sh.changxing.yuanyi.utils.CommonUtils;
 
 import static org.junit.Assert.assertEquals;
