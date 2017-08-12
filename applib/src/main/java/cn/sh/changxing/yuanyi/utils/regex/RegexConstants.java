@@ -1,4 +1,4 @@
-package cn.sh.changxing.yuanyi.utils.constans;
+package cn.sh.changxing.yuanyi.utils.regex;
 
 /**
  * @class：RegexConstants
@@ -16,7 +16,7 @@ public final class RegexConstants {
     public static final String REGEX_MOBILE_SIMPLE = "^[1]\\d{10}$";
 
     /**
-     * 正则：手机号（精确）
+     * 正则：手机号(精确)
      * <p>移动：134(0-8)、135、136、137、138、139、147、150、151、152、157、158、159、178、182、183、184、187、188</p>
      * <p>联通：130、131、132、145、155、156、175、176、185、186</p>
      * <p>电信：133、153、173、177、180、181、189</p>
