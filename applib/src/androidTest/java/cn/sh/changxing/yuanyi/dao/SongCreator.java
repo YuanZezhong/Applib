@@ -34,8 +34,7 @@ public class SongCreator extends AbstractDBCreator {
     @Override
     public void onCreate(SQLiteDatabase db) {
         LoggerFactory.getDefault().beginMethod();
-        String createString = mContext.getString(R.string.sql_download_list_create);
-        db.execSQL(createString);
+        db.execSQL(mContext.getString(R.string.sql_download_list_create));
         LoggerFactory.getDefault().endMethod();
     }
 

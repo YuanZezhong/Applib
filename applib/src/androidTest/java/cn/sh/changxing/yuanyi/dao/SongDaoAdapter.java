@@ -28,7 +28,7 @@ public class SongDaoAdapter extends BaseDaoAdapter {
 
     public void insertSong(int songId, String songName) {
         LoggerFactory.getDefault().d("{} in", LoggerFactory.getDefault().getCallerName());
-        mDBOperation.insert(R.string.sql_download_insert, new Object[] {songId, songName});
+        mDBOperation.insert(R.string.sql_download_insert, new Object[]{songId, songName});
         LoggerFactory.getDefault().d("{} out", LoggerFactory.getDefault().getCallerName());
     }
 
