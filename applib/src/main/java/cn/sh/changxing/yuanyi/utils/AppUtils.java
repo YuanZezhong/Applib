@@ -5,13 +5,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 /**
- * @class：PreViewDialog
- * @des:查看图片
- * @brief： Copyright:Copyright (c) 2016
- * Company:天好电子商务股份有限公司。
+ * @class：AppUtils
+ * @des:应用名称和版本号
  * @author：yanxiaosa
- * @email：yanxiaosa@tele-hot.com
- * @date：Administrator on 2017/4/10 08:08
+ * @email：15555994291@163.com
+ * @date：Administrator on 2017/8/12
  */
 
 public class AppUtils {
